@@ -1,3 +1,4 @@
+#include "../screen/EditorScreen.hpp"
 #pragma once
 
 class Application {
@@ -10,6 +11,7 @@ private:
     void Update();
     void Draw();
     void Shutdown();
+    EditorScreen editor;
 
     const int screenWidth = 1280;
     const int screenHeight = 720;

@@ -26,12 +26,11 @@ void Application::Run() {
 }
 
 void Application::Update() {
-
+    editor.Update();
 }
 
 void Application::Draw() {
-    DrawText("Hikari", 50, 50, 40, RAYWHITE);
-    DrawText("Hola mundo 🌸", 50, 120, 20, LIGHTGRAY);
+    editor.Draw();
 }
 
 void Application::Shutdown() {

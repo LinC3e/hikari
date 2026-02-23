@@ -11,3 +11,4 @@ file(GLOB_RECURSE SRC_FILES src/*.cpp)
 add_executable(Hikari ${SRC_FILES})
 
 target_link_libraries(Hikari raylib)
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
