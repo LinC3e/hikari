@@ -1,8 +1,8 @@
 #pragma once
 #include "raylib.h"
-#include "../ui/Button.hpp"
-#include "../ui/Panel.hpp"
-#include "../ui/PreviewPanel.hpp"
+#include "../ui/Button.h"
+#include "../ui/Panel.h"
+#include "../ui/PreviewPanel.h"
 
 class EditorScreen {
 public:

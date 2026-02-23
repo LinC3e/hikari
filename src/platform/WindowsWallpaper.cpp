@@ -1,4 +1,4 @@
-#include "WindowsWallpaper.hpp"
+#include "WindowsWallpaper.h"
 #include <windows.h>
 
 namespace WindowsWallpaper {

@@ -1,4 +1,4 @@
-#include "Panel.hpp"
+#include "Panel.h"
 
 Panel::Panel(float width)
     : width(width) {}

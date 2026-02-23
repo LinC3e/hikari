@@ -1,4 +1,4 @@
-#include "Button.hpp"
+#include "Button.h"
 
 Button::Button(Rectangle bounds, const std::string& text)
     : bounds(bounds), text(text) {}

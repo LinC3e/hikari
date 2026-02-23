@@ -1,4 +1,4 @@
-#include "../screen/EditorScreen.hpp"
+#include "../screen/EditorScreen.h"
 #pragma once
 
 class Application {
