@@ -4,71 +4,54 @@
 
 EditorScreen::EditorScreen()
     : leftPanel(280),
-      preview(280, 500, 280),
-      loadBtn1({40, 120, 200, 40}, "Load Test 1"),
-      loadBtn2({40, 170, 200, 40}, "Load Test 2"),
-      loadBtn3({40, 220, 200, 40}, "Load Test 3"),
-      setWallpaperButton({40, 300, 200, 40}, "Set as Wallpaper")
+      grid(280, 800, 720),
+      preview(1077, 200, 300),
+      setWallpaperButton({40, 100, 200, 40}, "Set as Wallpaper")
 {
 }
 
-void EditorScreen::LoadWallpaper(const char *path)
+void EditorScreen::Init()
 {
-  if (hasWallpaper)
-    UnloadTexture(wallpaperTexture);
-
-  wallpaperTexture = LoadTexture(path);
-  hasWallpaper = true;
-
-  preview.SetTexture(wallpaperTexture);
+    grid.LoadWallpapers({
+        "../../assets/images/test.jpg",
+        "../../assets/images/test2.jpg",
+        "../../assets/images/test3.jpg"
+    });
 }
 
 void EditorScreen::Update()
 {
-  loadBtn1.Update();
-  loadBtn2.Update();
-  loadBtn3.Update();
-  setWallpaperButton.Update();
+    grid.Update();
+    preview.Update();
+    setWallpaperButton.Update();
 
-  if (loadBtn1.IsClicked())
-    LoadWallpaper("../../assets/images/test.jpg");
+    if (grid.HasSelection())
+    {
+        preview.SetTexture(grid.GetSelectedTexture());
+    }
 
-  if (loadBtn2.IsClicked())
-    LoadWallpaper("../../assets/images/test2.jpg");
+    if (setWallpaperButton.IsClicked() && grid.HasSelection())
+    {
+        Image img = preview.ExportCurrentView(1920, 1080);
 
-  if (loadBtn3.IsClicked())
-    LoadWallpaper("../../assets/images/test3.jpg");
+        ExportImage(img, "output.png");
+        UnloadImage(img);
 
-  preview.Update();
+        std::wstring path =
+            std::filesystem::absolute("output.png").wstring();
 
-  if (setWallpaperButton.IsClicked() && hasWallpaper)
-  {
-    int monitorWidth = GetMonitorWidth(0);
-    int monitorHeight = GetMonitorHeight(0);
-
-    Image img = preview.ExportCurrentView(monitorWidth, monitorHeight);
-
-    ExportImage(img, "output.png");
-    UnloadImage(img);
-
-    std::wstring absolutePath =
-        std::filesystem::absolute("output.png").wstring();
-
-    WindowsWallpaper::SetWallpaper(absolutePath);
-  }
+        WindowsWallpaper::SetWallpaper(path);
+    }
 }
 
 void EditorScreen::Draw()
 {
-  ClearBackground({18, 18, 25, 255});
+    ClearBackground({18, 18, 25, 255});
 
-  leftPanel.Draw();
-  DrawText("Hikari", 40, 40, 28, RAYWHITE);
+    leftPanel.Draw();
+    grid.Draw();
+    preview.Draw();
 
-  loadBtn1.Draw();
-  loadBtn2.Draw();
-  loadBtn3.Draw();
-  setWallpaperButton.Draw();
-
-  preview.Draw();
+    DrawText("Hikari", 40, 40, 28, RAYWHITE);
+    setWallpaperButton.Draw();
 }

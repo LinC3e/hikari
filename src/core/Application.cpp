@@ -6,6 +6,7 @@ Application::Application() {}
 void Application::Init() {
     InitWindow(screenWidth, screenHeight, "Hikari");
     SetTargetFPS(60);
+    editor.Init();
 }
 
 void Application::Run() {
