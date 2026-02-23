@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include "../ui/Button.hpp"
+#include "../ui/Panel.hpp"
+#include "../ui/PreviewPanel.hpp"
 
 class EditorScreen {
 public:
@@ -10,7 +12,7 @@ public:
 
 private:
     void LoadWallpaper(const char* path);
-    
+
     Texture2D wallpaperTexture{};
     bool hasWallpaper = false;
     float zoom = 1.0f;
@@ -18,6 +20,11 @@ private:
 
     bool dragging = false;
     Vector2 lastMousePos = {0, 0};
+
+    // L-panel
+    Panel leftPanel;
+    // Preview for wall
+    PreviewPanel preview;
 
     // btns
     Button loadBtn1;
